@@ -1,0 +1,12 @@
+language: java
+before_install:
+  - chmod +x gradlew
+deploy:
+  provider: releases
+  api_key:
+    secure: tNy1WEMy/C7aDDx8IqA+tH+y5QGc5aFzOH+bi1A5SzYAGTu+5TV8+vBRePGeeQIDs0drCGXxUMNMPDaa/s3Oy4QCBocXPxLq9bs9csTWbbaOtpSv7i0Y5AtjdenQqhUiz210qBn/XaJjD20LOGo5DVBossMgQV7MD9N6ofsqHSN7A5331zNEEzthHAbbmSvqpjPH8GmJZy9evwhf9jrHqOb5tST2KtKPb6bzYJSDTN41LJooOK+HDJkphlsyOAGNG5iOsPhhdvd/onq9NzaHV+rMfwBPOBQhOROTcYqGPle8ut9vecmKlKrkIPonCVbIoYhoWIYesiDbalkznOX11NuP5gkuNHjKNFvBVIOM7BuZQWsqA8QEjhE4K3vrPiV4K+J1iW0CUukBGTgF3TWYcNbyxDRZDVZ23JDYvptBau9BPNNNw5PV4HZkz5o/p+jkplHeYncKt+JcF0Y/gyW0WK4rIYsJnd2sqc/uvCZsd+NrxZp90Dgtyo4cxl9YBVp9uah2COujmAU5nYt8UXOl0CqNKc0fCQ5QeSF64N8M6W69GoQ2uhWndy/F7fgujrONZqX3TdsuQXauRt1LJI7fQ3MD0NjVxcwh9iRNCO9gAUzw6KxNAFqlyPfHiNIhQyTkIzDJjX9VkYpiSBHS5H9mHK/ZP2INp5l/rd5dTojpH7Q=
+  file: build/libs/xlr-blazemeter-plugin-1.0.0.jar
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: xebialabs-community/xlr-blazemeter-plugin
