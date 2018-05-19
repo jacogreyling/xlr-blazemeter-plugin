@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.gradle
 build/
 develop-eggs/
 dist/
@@ -102,3 +103,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
