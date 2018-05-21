@@ -23,7 +23,7 @@ BlazeMeter markets a commercial, self-service load testing platform as a service
 
 ### Design decisions on plugin scope
 
-TBC
+The current version ONLY supports a single Test run. The other type of test that is not supported currently is called a Multi Test. A Multi Test is used for distributed load testing.
 
 ## Installation
 1. Copy the plugin JAR file into the `SERVER_HOME/plugins` directory of XL Release.
@@ -33,10 +33,14 @@ TBC
 
 ### Run BlazeMeter Test Case
 
-The **BlazeMeter: Start a Test** task type starts a preconfigured load test. It requires you to specify the following information:
+The **BlazeMeter: Run a Test** task type runs a preconfigured load test. It requires you to specify the following information:
 
 * The Api Key which identifies the user 'id:secret' associated with the project / workspace.
 * The Test ID to identify the test.
+* The Workspace ID for the tests / reports
+* The desired polling interval to check for updates
+
+[Optional] You can also capture the session ID for debugging purposes. This can be used to retrieve all assets remotely.
 
 ## References:
 * [BlazeMeter REST APIs](https://guide.blazemeter.com/hc/en-us/articles/206732689-BlazeMeter-REST-APIs)
