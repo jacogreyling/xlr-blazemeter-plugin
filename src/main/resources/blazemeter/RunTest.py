@@ -52,8 +52,11 @@ def callUrl(verb, url):
 
 # Initialize variables
 base_url = server.get('url').strip('/')
+app_url = ''
 data = ''
 master = ''
+project = ''
+account = ''
 
 # Make sure all the required paramaters are set
 if not base_url.strip():
@@ -83,12 +86,15 @@ if not pollingInterval:
 
 # Start the test
 start_test_url = '%s/tests/%s/start' % (base_url, test)
+print 'Starting BlazeMeter test\n'
 data = callUrl('post', start_test_url)
 session = data.get('result').get('sessionsId')[0]
 
 # Monitor the progress of the session
 session_status_url = '%s/sessions/%s/status' % (base_url, session)
+count = 1
 while True:
+    print 'Checking to see if the test is complete: checking #%d\n' % count
     data = callUrl('get', session_status_url)
     if data.get('result').get('status') == "ENDED":
         if 'errors' in data.get('result') and data.get('result').get('errors'):
@@ -97,12 +103,25 @@ while True:
             sys.exit(301)
         else:
             break
+    count += 1   
     time.sleep(pollingInterval)
 
 # Retrieve the master id from the session
 session_url = '%s/sessions/%s' % (base_url, session)
+print 'Retrieving the report id in order to lookup the test results report\n'
 data = callUrl('get', session_url)
 master = data.get('result').get('masterId')
+project = data.get('result').get('projectId')
+
+# Retrieve the various elements to build a url in order to view the reports
+account_url = '%s/accounts' % base_url
+print 'Retrieving account information so we can generate a test report summary URL\n'
+data = callUrl('get', account_url)
+result = data.get('result')[0]
+if result and 'id' in result:
+    account = result.get('id')
+    app_url = result.get('appUrl')
+    print 'Test report summary URL: %s/app/#/accounts/%s/workspaces/%s/projects/%s/masters/%s/summary\n' % (app_url, account, workspace, project, master)
 
 # Review the test report
 master_url = '%s/masters/%s' % (base_url, master)

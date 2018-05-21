@@ -20,6 +20,7 @@
         <!-- Inputs -->
         <property name="server" category="input" required="true" label="Server" kind="ci" referenced-type="blazemeter.Server" 
             description="The BlazeMeter server definition"/>
+        <property name="workspace" category="input" required="true" label="Workspace" description="The workspace id where all the tests / reports are stored" />    
         <property name="keyId" category="input" required="true" label="API Key ID" description="The API key id for the user running the test" />
         <property name="secret" category="input" required="true" label="API Key Secret" description="The API key secret for the user running the test" />
         <property name="test" category="input" required="true" label="Test ID" description="The test id of the test case to run" />
