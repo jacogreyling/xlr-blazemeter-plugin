@@ -86,16 +86,16 @@ if not pollingInterval:
 
 # Start the test
 start_test_url = '%s/tests/%s/start' % (base_url, test)
-print 'Starting BlazeMeter test\n'
+print 'BlazeMeter test %s started\n' % test
 data = callUrl('post', start_test_url)
 session = data.get('result').get('sessionsId')[0]
 
 # Monitor the progress of the session
-print 'The following session id has been created for this test run: %s\n' % session
+print 'The session was successfully started: %s\n' % session
 session_status_url = '%s/sessions/%s/status' % (base_url, session)
 count = 1
 while True:
-    print 'Checking to see if the test is complete: retry #%d\n' % count
+    print 'Monitoring session progress #%d\n' % count
     data = callUrl('get', session_status_url)
     if data.get('result').get('status') == "ENDED":
         if 'errors' in data.get('result') and data.get('result').get('errors'):
@@ -110,14 +110,14 @@ while True:
 
 # Retrieve the master id from the session
 session_url = '%s/sessions/%s' % (base_url, session)
-print 'Retrieving the report id in order to lookup the test results report\n'
+print 'Retrieving the master id\n'
 data = callUrl('get', session_url)
 master = data.get('result').get('masterId')
 project = data.get('result').get('projectId')
 
 # Retrieve the various elements to build a url in order to view the reports
 account_url = '%s/accounts' % base_url
-print 'Retrieving account information so we can generate a test report summary URL\n'
+print 'Retrieving account information\n'
 data = callUrl('get', account_url)
 result = data.get('result')[0]
 if result and 'id' in result:
@@ -129,14 +129,14 @@ if result and 'id' in result:
 master_url = '%s/masters/%s' % (base_url, master)
 data = callUrl('get', master_url)
 if 'passed' in data.get('result') and data.get('result').get('passed') == False:
-    print 'BlazeMeter test %s failed!\n' % test
+    print 'BlazeMeter test %s **failed**\n' % test
     print '```'
     print json.dumps(data)
     print '```'
     sys.exit(1)
 
 # Print output
-print 'BlazeMeter test %s completed successfully\n' % test
+print 'BlazeMeter test %s completed **successfully**\n' % test
 print '```'
 print json.dumps(data)
 print '```'

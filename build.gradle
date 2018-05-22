@@ -1,7 +1,14 @@
 // Plugins to use
 plugins {
     id "java"
-    id "com.github.hierynomus.license" version "0.13.0"
+    id "com.github.hierynomus.license" version "0.13.1"
+}
+
+// Repositories
+repositories {
+    maven {
+        url 'http://dist.xebialabs.com/public/maven2'
+    }
 }
 
 // Defaults
@@ -10,7 +17,7 @@ defaultTasks 'build'
 // License definition
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
-    strictCheck true
+    strictCheck false
     ext.year = Calendar.getInstance().get(Calendar.YEAR)
     ext.name = 'XEBIALABS'
 }
